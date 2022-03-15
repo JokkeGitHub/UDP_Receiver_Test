@@ -10,8 +10,12 @@ namespace UDP_Receiver_Test
         static void Main(string[] args)
         {
             PUdp.Create();
-            PUdp.BeginReceive();
-            Console.ReadKey();
+
+            while (true)
+            {
+                PUdp.BeginReceive();
+                Console.ReadKey();
+            }
         }
 
         internal static class PUdp
@@ -34,6 +38,7 @@ namespace UDP_Receiver_Test
                 IPEndPoint source = new IPEndPoint(0, 0);
                 byte[] message = socket.EndReceive(result, ref source);
                 string returnData = Encoding.ASCII.GetString(message);
+
                 Console.WriteLine("Data: " + returnData.ToString() + " from " + source);
             }
         }
